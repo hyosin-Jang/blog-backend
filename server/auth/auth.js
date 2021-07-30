@@ -1,7 +1,7 @@
 const { OAuth2Client } = require("google-auth-library");
 
 const client = new OAuth2Client(
-  "761604607478-u6t8vtsdeo7s1targd13gcnogb93gemn.apps.googleusercontent.com"
+ 
 );
 const connection = require("../db/mysql");
 const jwt = require("jsonwebtoken");
