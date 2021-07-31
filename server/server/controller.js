@@ -30,7 +30,6 @@ module.exports = {
     add : {
         board : (req, res) => {
             console.log(req.body);
-            /*
             const body = req.body;
 
             model.add.board(body, result => {
@@ -38,8 +37,42 @@ module.exports = {
                     res.send(true);
                 }
             })
-            */
+
         }
-      }
+    },
+    get : {
+        board : (req, res) => {
+  
+            const body  = req.body; 
+
+            model.get.board(body, result => {
+                if(result) {
+                res.send(result);
+                }
+            })
+        },
+
+        board_cnt : (req, res) => {
+
+            model.get.board_cnt(cnt => {
+              const result = { cnt : cnt }
+              res.send(result)
+            })
+        },
+        board_data : (req, res) => {
+            const body = req.body;
+    
+            model.get.board_data(body, data => {
+              const result = { data : data }
+              res.send(result)
+            })
+        }
+  
+    
+        
+          
+    }
+
+
    
 }
