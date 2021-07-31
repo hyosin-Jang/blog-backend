@@ -15,7 +15,7 @@ class right_write extends Component {
 
     _submitBoard = async function() {
         const title = document.getElementsByName('title')[0].value.trim();
-        const contents = document.getElementsByName('contents')[0].value.trim();
+        const contents = this.props.contents;
         
 
         if(title === "") {
@@ -32,13 +32,12 @@ class right_write extends Component {
             data : data,
             headers: new Headers()
         })
-        /*
 
         if(res.data) {
             alert('글 등록이 완료되었습니다.');
             return window.location.replace('/')
           } 
-        */  
+          
           
     }
 
@@ -47,7 +46,7 @@ class right_write extends Component {
     return (
         <div>
           <div id='post_submit'>
-            <button type ="button" onClick={()=> this._submitBoard()}> 포스트 등록 </button>
+            <button> Register </button>
           </div>
         </div>
     );

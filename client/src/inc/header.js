@@ -116,7 +116,7 @@ class header extends Component {
         <div class='header_grid'>
           <div className='acenter'>
           {this.state.login 
-          ? <h5> <Link to='/write'> 포스트 작성 </Link> </h5>
+          ? <h5> <Link to='/write'> Write Posts </Link> </h5>
           : null
           }
 
@@ -128,8 +128,8 @@ class header extends Component {
             </div>
 
             <div className='acenter'>
-              <h5 onClick={()=> this._openModal()}> 로그인 </h5>
-              <Modal visible={this.state.visible} width="400" height="300" effect="fadeInDown" onClickAway={()=>this._closeModal()}>
+              <h5 onClick={()=> this._openModal()}> Login </h5>
+              <Modal visible={this.state.visible} width="400" height="500" effect="fadeInDown" onClickAway={()=>this._closeModal()}>
             
               <form>
                 <div className = 'login_div'>
