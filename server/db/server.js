@@ -1,14 +1,11 @@
-//DB connection
-const mysql = require('mysql');//mysql 모듈 로드
+const express=require("express");
+const app=express();
+const members=require('./routes/members');
+const categories=require('./routes/categories');
 
-const dbConfig=require("./config/db.js");
-const con = mysql.createConnection(dbConfig);//DB 연동
+app.use('/members',members);
+app.use('/categores',categories);
 
-con.connect(function(error,results){//DB 접속
-    if (error) {
-        console.log(error);
-    }
-    console.log(results); 
+app.listen(3306,()=>{
+    console.log("running");
 });
-
-con.end();//DB 접속 종료

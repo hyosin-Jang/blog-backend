@@ -1,10 +1,18 @@
 const express=require('express');
 const router=express.Router();
 const mysql=require('mysql');
-const dbConfig=require('../config/db.js');
-const con=mysql.createConnection(dbConfig);
+const dbConfig=require('../config/dbConfig.js');
 const bodyParser=require('body-parser');
 
+const dbOptions = {
+    host: dbConfig.host,
+    port: dbConfig.port,
+    user: dbConfig.user,
+    password: dbConfig.password,
+    database: dbConfig.database
+};
+
+const con = mysql.createConnection(dbOptions);
 con.connect();
 
 router.use(bodyParser.json());
