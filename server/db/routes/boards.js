@@ -29,7 +29,9 @@ router.get('/',(req,res)=>{
 });
 
 router.get("/:b_num",(req,res)=>{
-    con.query('SELECT * FROM boards WHERE b_num=\''+req.params.b_num+'\'',(error,rows)=>{
+    var sql = 'SELECT * FROM boards WHERE b_num=\''+req.params.b_num+'\'';
+    var sql2 = 'UPDATE boards SET hit = hit + 1 WHERE b_num=\''+req.params.b_num+'\'';
+    con.query(sql,sql2,(error,rows)=>{
         if(error){
             throw error;
         }
@@ -40,8 +42,8 @@ router.get("/:b_num",(req,res)=>{
 
 //Insert
 router.post("/",(req,res)=>{
-    var sql='INSERT INTO boards VALUES(?,?,?,?,?,?)';
-    var params=[req.body.b_num,req.body.b_category,req.body.b_title,req.body.b_id,req.body.b_content,req.body.b_date,req.body.b_hit];
+    var sql='INSERT INTO boards VALUES(?,?,?,?)';
+    var params=[req.body.b_category,req.body.b_title,req.body.b_id,req.body.b_content,req.body.b_date];
 
     con.query(sql,params,(error,rows)=>{
         if(error){
@@ -54,8 +56,8 @@ router.post("/",(req,res)=>{
 
 //Update
 router.put("/:b_num",(req,res)=>{
-    var sql = 'UPDATE boards SET b_category='+req.body.b_category+', b_id='+req.body.b_id+', b_content='+req.body.b_content+', b_date='+req.body.b_date+', b_hit='+req.body.b_hit+' WHERE b_num=\''+req.params.b_num+"\'";
-    connection.query(sql, (error, rows)=>{
+    var sql = 'UPDATE boards SET b_category='+req.body.b_category+', b_id='+req.body.b_id+', b_content='+req.body.b_content+', b_date='+req.body.b_date+' WHERE b_num=\''+req.params.b_num+"\'";
+    con.query(sql, (error, rows)=>{
         if(error) {
             throw error;
         }
@@ -67,7 +69,7 @@ router.put("/:b_num",(req,res)=>{
 //Delete
 router.delete("/:b_num",(req,res)=>{
     var sql='DELETE FROM boards WHERE b_num=\''+req.params.b_num+'\'';
-    connection.query(sql, (error, rows)=>{
+    con.query(sql, (error, rows)=>{
         if(error) {
             throw error;
         }
