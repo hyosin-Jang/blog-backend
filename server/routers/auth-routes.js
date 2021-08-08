@@ -1,22 +1,17 @@
 const router = require("express").Router();
 const passport = require("passport");
 //const {isLoggedIn, isNotLoggedIn} = require('../middlewares');
-const Member = require("../models/members");
 
-// /auth/login
+// /auth login
 router.get("/login", (req, res) => {
   res.render("login");
 });
 
-// auth/logout
+// auth logout
 router.get("/logout", (req, res) => {
   res.send("log out");
 });
 
-/* 
-  scope : profile에서 가져올 것 
-  경로: /auth/google
-*/
 router.get(
   "/google",
   passport.authenticate("google", {
@@ -26,18 +21,18 @@ router.get(
 
 // callback route
 router.get(
-  "/google/redirect",
+  "/google/redirect/callback",
   passport.authenticate("google"),
   (err, req, res, next) => {
     if (err.name === "TokenError") {
       res.redirect("/google"); // login page redirect
-    } else {
-      // handle other errors here
+      console.log("TokenError");
     }
   },
   (req, res) => {
-    // On success, redirect back to '/'
-    res.redirect("/");
+    // On success, home 으로 이동
+    console.log("프로필로 이동");
+    res.redirect("/profile");
   }
 );
 
