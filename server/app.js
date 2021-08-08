@@ -59,6 +59,6 @@ app.get("/", (req, res) => {
   res.render("home", { user: req.user });
 });
 
-app.listen(3001, () => {
+app.listen(4000, () => {
   console.log("app now listening");
 });
