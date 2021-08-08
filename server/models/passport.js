@@ -18,12 +18,14 @@ passport.use(
 
         if (member) {
           member.m_id = id;
+          member.m_name = name;
+          member.m_email = email;
           member.save();
           return cb(null, member);
         } else {
           const newMember = await Member.create({
-            email,
-            name,
+            m_email: email,
+            m_name: name,
             m_id: id
           });
           return cb(null, newMember);
