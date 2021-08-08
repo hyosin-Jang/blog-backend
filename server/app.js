@@ -1,23 +1,30 @@
 const express = require("express");
 const path = require("path");
+const passport = require("passport");
 const morgan = require("morgan");
 const nunjucks = require("nunjucks");
 const authRoutes = require("./routes/auth-routes");
+const profileRoutes = require("./routes/profile-routes");
 const passportSetup = require("./config/passport-setup");
+const session = require("express-session");
 
-// connect to mysqldb
-const { sequelize } = require("./models");
-passportSetup(); // passport 설정
 const app = express();
 
 //app.set('port', process.env.PORT || 3001);
 app.set("view engine", "ejs");
 
-app.use("/auth", authRoutes);
+// session setup
+app.use(
+  session({
+    secret: "blog-backend",
+    cookie: { maxAge: 60 * 60 * 1000 }, // 1시간 제한
+    resave: true,
+    saveUninitialized: true
+  })
+);
 
-app.get("/", (req, res) => {
-  res.render("home");
-});
+app.use(passport.initialize());
+app.use(passport.session());
 
 /* ------------------------------------------------------------------
  db.sequelize를 불러와서 sync메서드로 서버 실행시 mysql 연동되도록 했음
@@ -25,6 +32,10 @@ app.get("/", (req, res) => {
  (테이블 잘못 만든 경우에 true 설정)
   ------------------------------------------------------------------
 */
+
+// connect to mysqldb
+const { sequelize } = require("./models");
+
 sequelize
   .sync({ force: false })
   .then(() => {
@@ -38,6 +49,15 @@ app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// create routes
+app.use("/auth", authRoutes);
+app.use("/profile", profileRoutes);
+
+// create home routes
+app.get("/", (req, res) => {
+  res.render("home", { user: req.user });
+});
 
 app.listen(3001, () => {
   console.log("app now listening");
