@@ -3,11 +3,10 @@ CREATE DATABASE `blog`;
 Use `blog`;
 
 CREATE TABLE `members` (
-    `m_tokens` varchar(30) NOT NULL,
     `m_id` varchar(30) NOT NULL,
-    `m_email` boolean NOT NULL,
+    `m_email` varchar(30) NOT NULL,
     `m_name` varchar(30) NOT NULL,
-    `m_picture` varchar(20) NOT NULL,
+    `m_picture` varchar(50),
     PRIMARY KEY (`m_id`)
 );
 
