@@ -25,7 +25,7 @@ CREATE TABLE `boards` (
     `b_hit` int(30) default 0 NOT NULL,
     PRIMARY KEY (`b_num`),
     FOREIGN KEY (`b_id`) REFERENCES `members`,
-    FOREIGN KEY (`b_category`) REFERENCES `ct_name`
+    FOREIGN KEY (`b_category`) REFERENCES `categories`
 );
 
 
