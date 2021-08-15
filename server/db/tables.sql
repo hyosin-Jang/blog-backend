@@ -23,19 +23,17 @@ CREATE TABLE `boards` (
     `b_content` text,
     `b_date` datetime NOT NULL,
     `b_hit` int(30) default 0 NOT NULL,
-    PRIMARY KEY (`b_num`)
+    PRIMARY KEY (`b_num`),
+    FOREIGN KEY (`b_id`) REFERENCES `members`,
+    FOREIGN KEY (`b_category`) REFERENCES `ct_name`
 );
 
-ALTER TABLE `boards` (
-    ADD FOREIGN KEY (`b_id`) REFERENCES `members(m_id)`,
-    ADD FOREIGN KEY (`b_category`) REFERENCES `categories(ct_name)`
-);
 
 CREATE TABLE `comments`(
     `cm_num` int(100) NOT NULL AUTO_INCREMENT,
     `cm_id` varchar(30),
     `cm_content` text,
-    PRIMARY KEY (`cm_num`)
+    PRIMARY KEY (`cm_num`),
+    FOREIGN KEY (`cm_id`) REFERENCES `members`
 );
 
-ALTER TABLE `comments` ADD FOREIGN KEY (`cm_id`) REFERENCES `members(m_id)`;
