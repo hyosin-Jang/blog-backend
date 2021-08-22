@@ -69,7 +69,7 @@ router.put("/:id", (req, res) => {
   var sql =
     "UPDATE members SET email=" +
     req.body.email +
-    ", m_name=" +
+    ", name=" +
     req.body.name +
     ", picture=" +
     req.body.picture +
