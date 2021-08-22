@@ -3,15 +3,13 @@ const path = require("path");
 const passport = require("passport");
 const morgan = require("morgan");
 const nunjucks = require("nunjucks");
-const authRoutes = require("./routes/auth-routes");
-const profileRoutes = require("./routes/profile-routes");
+const authRoutes = require("./routers/auth-routes");
+const dbRoutes = require("./routers/db-routes");
+const profileRoutes = require("./routers/profile-routes");
 const passportSetup = require("./config/passport-setup");
 const session = require("express-session");
 
 const app = express();
-
-//app.set('port', process.env.PORT || 3001);
-app.set("view engine", "ejs");
 
 // session setup
 app.use(
@@ -34,7 +32,7 @@ app.use(passport.session());
 */
 
 // connect to mysqldb
-const { sequelize } = require("./models");
+const { sequelize } = require("./models/index.js");
 
 sequelize
   .sync({ force: false })
@@ -53,6 +51,9 @@ app.use(express.urlencoded({ extended: false }));
 // create routes
 app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
+
+// create db routes
+app.use("/db", dbRoutes);
 
 // create home routes
 app.get("/", (req, res) => {
