@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './views/App.css';
-import axios from 'axios';
+import API from "./api";
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 //import { Home, Test } from './inc';
 import { Head } from './views/inc';
@@ -48,13 +48,16 @@ class App extends Component {
     }
   }
 
-  _getData = async (b_id) => {
-    
-    const getData = await axios('/get/board_data', {
-      method : 'POST',
-      headers: new Headers(),
-      data : { id : b_id }
-    });
+  _getData = async id => {
+    const getData = await API.get(
+      "/board/get/board_data",
+      {
+        data: { id: id }
+      },
+      res => {
+        console.log(res);
+      }
+    );
 
     // 날짜 구하기
     const date = getData.data[0].date.slice(0, 10) + ' ' + getData.data[0].date.slice(11, 16);
@@ -97,22 +100,19 @@ class App extends Component {
 
     
     // Board 테이블 데이터 전체 수
-    const total_cnt = await axios('/get/board_cnt', {
-      method : 'POST',
-      headers: new Headers(),
-      //data : { search : search, category : categorys }
-    });
+    const total_cnt = await API.get("/board/get/board_cnt");
+    //data : { search : search, category : categorys }
+
 
     // 데이터 가져오기
-    const total_list = await axios('/get/board', {
-      method : 'POST',
-      headers: new Headers(),
-      data : { 
-        limit : list_limit, 
-        page : list_pages, 
-        //search : search, 
-        category : categorys }
-    })
+    const total_list = await API.get("/board/get/board", {
+      data: {
+        limit: list_limit,
+        page: list_pages,
+        //search : search,
+        category: categorys
+      }
+    });
 
     // 전체 페이지 수 구하기
     let page_arr = [];
