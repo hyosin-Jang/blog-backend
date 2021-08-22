@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './main.css';
-import axios from 'axios';
+import API from "../../api";
 
 class view extends Component {
   constructor(props) {
@@ -18,10 +18,8 @@ class view extends Component {
   _getData = async function() {
     const board_id = this.props.match.params.data;
 
-    const getData = await axios('/get/board_data', {
-      method : 'POST',
-      headers: new Headers(),
-      data : { id : board_id }
+   const getData = await API.post("board/get/board_data", {
+      data: { id: board_id }
     });
 
     const date = getData.data[0].date.slice(0, 10) + ' ' + getData.data[0].date.slice(11, 16);
