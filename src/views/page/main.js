@@ -3,7 +3,7 @@ import './main.css';
 
 import { Route, Link, Switch } from 'react-router-dom';
 import { List, Write, View } from './index.js'; 
-import { Right_Write } from './right/index.js'; 
+import Right_Write from "./right.js";
 
 
 
