@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './main.css';
-
-import axios from 'axios';
+import API from "../../api";
 import { Link } from 'react-router-dom';
 
 class list extends Component {
@@ -25,16 +24,14 @@ class list extends Component {
     const {limit} = this.state;
     const page = this._setPage();
 
-    //Board 테이블 전체 데이터 수 
-    const total_cnt = await axios('/get/board_cnt');
-    console.log(total_cnt.data.cnt)
+    //Board 테이블 전체 데이터 수
+    const total_cnt = await API.get("/board/get/board_cnt");
+    console.log(total_cnt.data.cnt);
 
     //데이터 가져오기
-    const total_list = await axios('/get/board', {
-      method : 'POST',
-      headers: new Headers(),
-      data : { limit : limit, page : page }
-    })
+    const total_list = await API.post("/board/get/board", {
+      data: { limit: limit, page: page }
+    });
 
     //전체 페이지 수 구하기
     let page_arr = [];
