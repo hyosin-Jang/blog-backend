@@ -116,7 +116,7 @@ class header extends Component {
         <div class='header_grid'>
           <div className='acenter'>
           {this.state.login 
-          ? <h5> <Link to='/write'> Write Posts </Link> </h5>
+          ? <h5> <Link to='/write'> Write </Link> </h5>
           : null
           }
 
@@ -124,7 +124,7 @@ class header extends Component {
             <div> </div>
             <div className='acenter'>
                 <Route path='/'/>
-                <Link className='link_tit' to='/'> <h3> MJ's Blog </h3> </Link>
+                <Link className='link_tit' to='/'> <h3> My Blog </h3> </Link>
             </div>
 
             <div className='acenter'>

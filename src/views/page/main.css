@@ -8,13 +8,13 @@
     font-family: 'Gowun Dodum', sans-serif;
 }
 
-#Mains-left { border-right: solid 1px #f7f7f7; }
-#Mains-right { border-left: solid 1px #f2f0f3; }
+#Mains-left { border-right: solid 1px #2b2929; }
+#Mains-right { border-left: solid 1px #2b2929; }
 
 .Write {
     padding: 30px;
     padding-left: 30px;
-    background-color: rgb(209, 222, 238);
+    background-color: rgb(161, 168, 177);
 }
 
 .Write div {
@@ -69,7 +69,7 @@
     margin-left: 20px;
     margin-right: 20px;
     min-height: 500px;
-    background-color: rgb(163, 188, 235);
+    background-color: rgb(112, 121, 138);
 }
 
 .list_tit {

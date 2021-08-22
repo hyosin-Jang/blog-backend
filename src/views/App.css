@@ -16,7 +16,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #a7b1c4;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -45,7 +45,8 @@
   border-bottom : solid 1px #ababab;
   font-family: 'Pacifico', cursive;
   font-size: 35px;
-  background : linear-gradient(to right bottom, rgb(145, 180, 224), white);
+  background : url('image/bg5.jpg') top no-repeat fixed;
+  background-size : cover;
 }
 
 .acenter { 
@@ -57,7 +58,7 @@
 }
 
 .link_tit {
-  color : black;
+  color : rgb(253, 251, 251);
   text-decoration: none;
 }
 
