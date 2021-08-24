@@ -30,9 +30,11 @@ CREATE TABLE boards (
 
 CREATE TABLE comments(
     num int(100) NOT NULL AUTO_INCREMENT,
+    board_num int(100) NOT NULL,
     id varchar(30) NOT NULL,
     content text,
     PRIMARY KEY (num),
-    CONSTRAINT fk_c_id FOREIGN KEY (id) REFERENCES members(id)
+    CONSTRAINT fk_c_id FOREIGN KEY (id) REFERENCES members(id),
+    CONSTRAINT fk_b_num FOREIGN KEY (board_num) REFERENCES boards(num)
 );
 
