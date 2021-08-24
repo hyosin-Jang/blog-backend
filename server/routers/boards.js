@@ -1,103 +1,100 @@
-const express = require("express");
-const router = express.Router();
-const bodyParser = require("body-parser");
-const { sequelize } = require("../models/index.js");
-/*
-const mysql = require("mysql");
-const dbConfig = require("../config/dbConfig.js");
+const sequelize = require("./models").sequelize;
+const Board = require("../models");
 
-const dbOptions = {
-  host: dbConfig.host,
-  port: dbConfig.port,
-  user: dbConfig.username,
-  password: dbConfig.password,
-  database: dbConfig.database
-};
-
-
-const con = mysql.createConnection(dbOptions);
-con.connect();
-
-*/
-router.use(bodyParser.json());
-
-//Select
-router.get("/", (req, res) => {
-  sequelize.query("SELECT * FROM boards", (error, rows) => {
-    if (error) {
-      throw error;
+module.exports = {
+    //Create
+    add : {
+        board : (body, callback) => {
+            Board.create({
+                title : body.title,
+                id : body.id,
+                content : body.content,
+                date : new Date(),
+                hit : 0
+            })
+            .then(data => {
+                callback(true)
+            })
+            .catch(err => {
+                throw err;
+            })
+        }
+    },
+    //Select
+    get : {
+        //게시물 목록 조회
+        board : (callback) => {
+            Board.findAll()
+            .then(data => {
+                callback(data)
+            })
+            .catch(err => {
+                throw err;
+            })
+        },
+        //게시물 내용 조회
+        board_data : (body, callback) => {
+            Board.findAll({
+                include : [
+                    {
+                        model : members,
+                        attributes : ['id']
+                    }
+                ],
+                where : { num : body.num }
+            })
+            .then(result => {
+                callback(result);
+            })
+            .catch(err => {
+                throw err;
+            })
+        },
+    },
+    //Update
+    update : {
+        //게시물 내용 업데이트
+        board : (body, callback) => {
+            Board.update({
+                title : body.title,
+                id : body.id,
+                content : body.content
+            }, {
+                where : { num : body.num }
+            })
+            .then( () => {
+                callback(true)
+            })
+            .catch(err => {
+                throw err;
+            })
+        },
+        //조회수 업데이트
+        hit : (body, callback) => {
+            Board.update({ hit : sequelize.literal('hit + 1')}, {
+                where : { num : body.num }
+            })
+            .then(data => {
+                callback(true)
+            })
+            .catch(err => {
+                throw err;
+            })
+        }
+    },
+    //Delete
+    delete : {
+        //게시물 삭제
+        board : (body, callback) => {
+            Board.destroy({
+                where : { num : body.num }
+            })
+            .then( () => {
+                callback(true)
+            })
+            .catch(err => {
+                throw err;
+            })
+        }
     }
-    console.log("Board is: ", rows);
-    res.send(rows);
-  });
-});
-
-router.get("/:num", (req, res) => {
-  var sql = "SELECT * FROM boards WHERE num='" + req.params.num + "'";
-  var sql2 =
-    "UPDATE boards SET hit = hit + 1 WHERE num='" + req.params.num + "'";
-  sequelize.query(sql, sql2, (error, rows) => {
-    if (error) {
-      throw error;
-    }
-    console.log("Board is: ", rows);
-    res.send(rows);
-  });
-});
-
-//Insert
-router.post("/", (req, res) => {
-  var sql = "INSERT INTO boards VALUES(?,?,?,?)";
-  var params = [
-    req.body.category,
-    req.body.title,
-    req.body.id,
-    req.body.content,
-    req.body.date
-  ];
-
-  sequelize.query(sql, params, (error, rows) => {
-    if (error) {
-      throw error;
-    }
-    console.log("Board is: ", rows);
-    res.send(rows);
-  });
-});
-
-//Update
-router.put("/:num", (req, res) => {
-  var sql =
-    "UPDATE boards SET category=" +
-    req.body.category +
-    ", id=" +
-    req.body.id +
-    ", content=" +
-    req.body.content +
-    ", date=" +
-    req.body.date +
-    " WHERE num='" +
-    req.params.num +
-    "'";
-  sequelize.query(sql, (error, rows) => {
-    if (error) {
-      throw error;
-    }
-    console.log("Boards info is: ", rows);
-    res.send(rows);
-  });
-});
-
-//Delete
-router.delete("/:num", (req, res) => {
-  var sql = "DELETE FROM boards WHERE num='" + req.params.num + "'";
-  sequelize.query(sql, (error, rows) => {
-    if (error) {
-      throw error;
-    }
-    console.log("Boards info is: ", rows);
-    res.send(rows);
-  });
-});
-
-module.exports = router;
+}
