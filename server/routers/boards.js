@@ -1,4 +1,4 @@
-const sequelize = require("./models").sequelize;
+const sequelize = require("../models").sequelize;
 const Board = require("../models");
 
 module.exports = {

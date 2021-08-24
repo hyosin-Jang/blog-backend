@@ -1,4 +1,4 @@
-const sequelize = require("./models").sequelize;
+const sequelize = require("../models").sequelize;
 const Comment = require("../models");
 
 module.exports = {
