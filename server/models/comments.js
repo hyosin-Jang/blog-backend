@@ -4,15 +4,20 @@ module.exports = class Comment extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        cm_num: {
-          type: Sequelize.INTEGER,
-          allowNull: false
+        num: {
+          type: Sequelize.INTEGER(100),
+          allowNull: false,
+          primaryKey: true
         },
-        cm_id: {
+        board_num: {
+          type: Sequelize.INTEGER(100),
+          allowNull: false,
+        },
+        id: {
           type: Sequelize.STRING(30),
           allowNull: false
         },
-        cm_content: {
+        content: {
           type: Sequelize.TEXT(200),
           allowNull: true
         }
@@ -29,6 +34,7 @@ module.exports = class Comment extends Sequelize.Model {
     );
   }
   static associate(db) {
-    db.Comment.belongsTo(db.Member, { foreignKey: "cm_id", targetKey: "m_id" });
+    db.Comment.belongsTo(db.Member, { foreignKey: "id", targetKey: "id" });
+    db.Comment.belongsTo(db.Board, { foreignKey : "board_num", targetKey: "num"});
   }
 };
