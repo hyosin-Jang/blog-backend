@@ -2,14 +2,6 @@ const psth = require('path');
 const boards = require('./boards');
 const comments = require('./comments');
 
-/*
-const salt  = require(path.join(__dirname, 'config', 'dbConfig.js'))
- .salt
-*/
-
-//const hashing = require(path.join(__dirname, 'config', 'hashing.js'))
-
-
 module.exports = {
     needs: () => upload,
 
