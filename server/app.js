@@ -18,8 +18,6 @@ app.use(
     saveUninitialized: true
   })
 );
-// / 경로로 오면 routes로 이동
-app.use("/api", routes);
 
 //app.use(passport.initialize());
 //app.use(passport.session());
@@ -56,6 +54,9 @@ process.setMaxListeners(15);
 app.get("/", function (req, res) {
   res.send("This is main");
 });
+
+// / 경로로 오면 routes로 이동
+app.use("/api", routes);
 
 app.listen(4000, () => {
   console.log("app now listening");
