@@ -4,7 +4,7 @@ const passport = require("passport");
 const morgan = require("morgan");
 const nunjucks = require("nunjucks");
 const authRoutes = require("./routers/auth-routes");
-const dbRoutes = require("./routers/db-routes");
+const dbRoutes = require("./routers/route");
 const profileRoutes = require("./routers/profile-routes");
 const passportSetup = require("./config/passport-setup");
 const session = require("express-session");
@@ -53,7 +53,7 @@ app.use("/auth", authRoutes);
 app.use("/profile", profileRoutes);
 
 // create db routes
-app.use("/db", dbRoutes);
+app.use("/dbRoute", dbRoutes);
 
 // create home routes
 app.get("/", (req, res) => {
