@@ -1,3 +1,14 @@
+🛠 Development Stack
+React  Nodejs  Docker
+
+❤️ Frontend
+  
+  🎨 Design
+  ![image](https://user-images.githubusercontent.com/81309465/131250903-9cd344d5-0880-49de-ac82-21678e5463d3.png)
+
+
+src/views : 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
