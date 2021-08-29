@@ -3,7 +3,7 @@ const boards = require("./boards");
 const comments = require("./comments");
 
 module.exports = {
-  //needs: () => upload,
+  needs: () => upload,
 
   /*
   api: {
@@ -20,16 +20,36 @@ module.exports = {
   },
   */
   add: {
-    board: (req, res) => {
-      //const body = req.data;
-      console.log("req", req.body);
-      res.send("성공:");
+    board : (req, res) => {
+      console.log(req.body);
+      const body = req.body;
 
-      //boards.add.board(body, result => {
-      //  if(result) {
-      //      res.send(true);
-      //  }
-      //})
+      model.add.board(body, result => {
+          if(result) {
+              res.send(true);
+          }
+      })
+  },
+
+  board_cnt : (req, res) => {
+
+      model.add.board_cnt(cnt => {
+        const result = { cnt : cnt }
+        if(result) {
+          res.send(true);
+        }      
+      })
+  },
+
+  board_data : (req, res) => {
+      const body = req.body;
+
+      model.add.board_data(body, data => {
+        const result = { data : data }
+        if(result) {
+          res.send(true);
+        }
+      })
     }
 
     /*
