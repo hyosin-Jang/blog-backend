@@ -24,7 +24,7 @@ class Right_Write extends Component {
 
     const data = { title: title, contents: contents };
 
-    const res = await API.post("/board/add/board", {
+    const res = await API.post("/api/add/board", {
       data: data
     });
 
