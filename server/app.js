@@ -3,12 +3,10 @@ const path = require("path");
 const passport = require("passport");
 const morgan = require("morgan");
 const nunjucks = require("nunjucks");
-const authRoutes = require("./routers/auth-routes");
-const dbRoutes = require("./routers/route");
-const profileRoutes = require("./routers/profile-routes");
 const passportSetup = require("./config/passport-setup");
 const session = require("express-session");
-
+const authRoutes = require("./routers/auth-routes");
+const routes = require("./routers/index");
 const app = express();
 
 // session setup
@@ -20,9 +18,11 @@ app.use(
     saveUninitialized: true
   })
 );
+// / 경로로 오면 routes로 이동
+app.use("/api", routes);
 
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 /* ------------------------------------------------------------------
  db.sequelize를 불러와서 sync메서드로 서버 실행시 mysql 연동되도록 했음
@@ -31,6 +31,7 @@ app.use(passport.session());
   ------------------------------------------------------------------
 */
 
+//app.use("/auth", authRoutes);
 // connect to mysqldb
 const { sequelize } = require("./models/index.js");
 
@@ -43,21 +44,17 @@ sequelize
     console.error(err);
   });
 
+//const api = require("./api");
+//app.use("/api", api);
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// create routes
-app.use("/auth", authRoutes);
-app.use("/profile", profileRoutes);
+process.setMaxListeners(15);
 
-// create db routes
-app.use("/dbRoute", dbRoutes);
-
-// create home routes
-app.get("/", (req, res) => {
-  res.render("home", { user: req.user });
+app.get("/", function (req, res) {
+  res.send("This is main");
 });
 
 app.listen(4000, () => {
