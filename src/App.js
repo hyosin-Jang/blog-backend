@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 import { Head } from './views/inc';
 import { Main } from './views/page/index.js';
 import queryString from 'query-string';
+import axios from 'axios';
 
 
 class App extends Component {
