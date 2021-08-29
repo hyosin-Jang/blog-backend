@@ -1,57 +1,55 @@
-import React, { Component } from 'react';
-import './views/App.css';
+import React, { Component } from "react";
+import "./views/App.css";
 import API from "./api";
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Switch } from "react-router-dom";
 //import { Home, Test } from './inc';
-import { Head } from './views/inc';
-import { Main } from './views/page/index.js';
-import queryString from 'query-string';
-import axios from 'axios';
-
+import { Head } from "./views/inc";
+import { Main } from "./views/page/index.js";
+import queryString from "query-string";
 
 class App extends Component {
   constructor(props) {
-    super(props)
+    super(props);
+    // 전달하는 값
     this.state = {
-      login : false,
-      admin : false,
-      user_ip : "",
-      signup : false,
-      login_modal : false,
-      list_data : [],
-      list_page : 1,
-      list_limit : 10,
-      list_all_page : [],
-      list_search : "",
-      category : "",
-      user_id : "",
-      data : "",
-      date : "",
-      pre_view : "",
-      next_view : "",
-      category_data : [],
-      select_category : "",
-
-    }
+      login: false,
+      admin: false,
+      user_ip: "",
+      signup: false,
+      login_modal: false,
+      list_data: [],
+      list_page: 1,
+      list_limit: 10,
+      list_all_page: [],
+      list_search: "",
+      category: "",
+      user_id: "",
+      data: "",
+      date: "",
+      pre_view: "",
+      next_view: "",
+      category_data: [],
+      select_category: ""
+    };
   }
 
   componentDidMount() {
     this._getListData();
-    this._getAllCategoryData();
+    //this._getAllCategoryData(); => 나중에 풀어주기
 
-    if(sessionStorage.login && sessionStorage.IP) {
-      this.setState({ 
-        login : JSON.parse(sessionStorage.login).id, 
-        admin : JSON.parse(sessionStorage.login).admin,
+    if (sessionStorage.login && sessionStorage.IP) {
+      this.setState({
+        login: JSON.parse(sessionStorage.login).id,
+        admin: JSON.parse(sessionStorage.login).admin,
         //user_ip : JSON.parse(sessionStorage.IP),
-        user_id : JSON.parse(sessionStorage.login).m_id, 
-      })
+        user_id: JSON.parse(sessionStorage.login).m_id
+      });
     }
   }
 
   _getData = async id => {
     const getData = await API.get(
-      "/board/get/board_data",
+      "/api/get/board_data",
       {
         data: { id: id }
       },
@@ -61,35 +59,38 @@ class App extends Component {
     );
 
     // 날짜 구하기
-    const date = getData.data[0].date.slice(0, 10) + ' ' + getData.data[0].date.slice(11, 16);
+    const date =
+      getData.data[0].date.slice(0, 10) +
+      " " +
+      getData.data[0].date.slice(11, 16);
 
-    return this.setState({ data : getData, date : date })
-  }
+    return this.setState({ data: getData, date: date });
+  };
 
-  _setPage = function() {
-    if(sessionStorage.page) {
-      this.setState({ list_page : Number(sessionStorage.page) })
+  _setPage = function () {
+    if (sessionStorage.page) {
+      this.setState({ list_page: Number(sessionStorage.page) });
       return Number(sessionStorage.page);
     }
 
-    this.setState({ list_page : 1 })
+    this.setState({ list_page: 1 });
     return 1;
-  }
+  };
 
-  _changePage = (el) => {
-    this.setState({ list_page : el })
-    sessionStorage.setItem('page', el);
+  _changePage = el => {
+    this.setState({ list_page: el });
+    sessionStorage.setItem("page", el);
 
     return this._getListData();
-  }
+  };
 
-  _getListData = async function() {
+  _getListData = async function () {
     const { list_limit } = this.state;
     const list_pages = this._setPage();
 
-    let categorys = '';
-    if(sessionStorage.getItem('category')) {
-      categorys = sessionStorage.getItem('category')
+    let categorys = "";
+    if (sessionStorage.getItem("category")) {
+      categorys = sessionStorage.getItem("category");
     }
 
     /*
@@ -99,14 +100,12 @@ class App extends Component {
     }
     */
 
-    
     // Board 테이블 데이터 전체 수
-    const total_cnt = await API.get("/board/get/board_cnt");
+    const total_cnt = await API.get("/api/get/board_cnt");
     //data : { search : search, category : categorys }
 
-
     // 데이터 가져오기
-    const total_list = await API.get("/board/get/board", {
+    const total_list = await API.get("/api/get/board", {
       data: {
         limit: list_limit,
         page: list_pages,
@@ -118,138 +117,151 @@ class App extends Component {
     // 전체 페이지 수 구하기
     let page_arr = [];
 
-    for(let i = 1; i <= Math.ceil(total_cnt.data.cnt / list_limit); i++) {
+    for (let i = 1; i <= Math.ceil(total_cnt.data.cnt / list_limit); i++) {
       page_arr.push(i);
     }
 
-    this.setState({ list_data : JSON.stringify(total_list.data), 
-                    list_all_page : page_arr})
-                    //, 
-                    //list_search : search })
-  }
+    this.setState({
+      list_data: JSON.stringify(total_list.data),
+      list_all_page: page_arr
+    });
+    //,
+    //list_search : search })
+  };
 
-  _login = (data) => {
-    sessionStorage.setItem('login', JSON.stringify(data.suc))
+  _login = data => {
+    sessionStorage.setItem("login", JSON.stringify(data.suc));
     //sessionStorage.setItem('IP', JSON.stringify(data.ip))
 
-    this.setState({ login : JSON.parse(sessionStorage.login).id,  
-                    admin : JSON.stringify(data.suc).admin,
-                   
-                    user_id : JSON.parse(sessionStorage.login).user_id
-    })
-    return window.location.reload()
-  }
+    this.setState({
+      login: JSON.parse(sessionStorage.login).id,
+      admin: JSON.stringify(data.suc).admin,
+
+      user_id: JSON.parse(sessionStorage.login).user_id
+    });
+    return window.location.reload();
+  };
 
   _logout = () => {
-    this.setState({ login : false, admin : false })
+    this.setState({ login: false, admin: false });
 
-    sessionStorage.removeItem('login')
+    sessionStorage.removeItem("login");
     //sessionStorage.removeItem('IP')
-  }
- 
+  };
+
   // 카테고리 변동
-  _changeCatgory = (target) => {
-    sessionStorage.setItem('category', target);
-    return window.location.href = '/';
-  }
+  _changeCatgory = target => {
+    sessionStorage.setItem("category", target);
+    return (window.location.href = "/");
+  };
 
-  _getPreAndNextData = async (b_id) => {
-    const category = sessionStorage.getItem('category');
+  /*
+  _getPreAndNextData = async b_id => {
+    const category = sessionStorage.getItem("category");
 
-    const res = await axios('/get/pre_and_next', {
-      method : 'POST',
+    const res = await API("/get/pre_and_next", {
+      method: "POST",
       headers: new Headers(),
-      data : { board_id : b_id, category : category }
-    })
+      data: { board_id: b_id, category: category }
+    });
 
     this.setState({
-      pre_view : res.data.pre,
-      next_view : res.data.next
-   })
-  }
+      pre_view: res.data.pre,
+      next_view: res.data.next
+    });
+  };
+  */
 
-  _getAllCategoryData = async function() {
-    const getData = await axios('/get/category');
+  /*
+  _getAllCategoryData = async function () {
+    const getData = await API("/get/category");
 
-    this.setState({ category_data : getData.data })
-  }
+    this.setState({ category_data: getData.data });
+  };
+  */
 
-  _selectCategoryData = async (b_id) => {
-    let category = document.getElementsByName('select_category')[0].value;
+  /*
+  _selectCategoryData = async b_id => {
+    let category = document.getElementsByName("select_category")[0].value;
 
-    if(b_id) {
+    if (b_id) {
       // 수정 페이지일 경우 카테고리 변경
-      const getData = await axios('/get/board_data', {
-        method : 'POST',
+      const getData = await API("/get/board_data", {
+        method: "POST",
         headers: new Headers(),
-        data : { id : b_id }
+        data: { id: b_id }
       });
 
-      return this.setState({ select_category : getData.data[0].cat_id })
+      return this.setState({ select_category: getData.data[0].cat_id });
     }
 
     this.setState({
-      select_category : category
-    })
-  }
-  
+      select_category: category
+    });
+  };
+  */
 
   render() {
-    const { 
-      login, admin, login_modal,
-      list_data, list_all_page, list_page, user_id,
-      data, pre_view, next_view, category_data, select_category
+    const {
+      login,
+      admin,
+      login_modal,
+      list_data,
+      list_all_page,
+      list_page,
+      user_id,
+      data,
+      pre_view,
+      next_view,
+      category_data,
+      select_category
     } = this.state;
 
-    const { 
-      _login, _logout, _changePage,
-      _changeCatgory, _getData, _getPreAndNextData, _selectCategoryData
+    const {
+      _login,
+      _logout,
+      _changePage,
+      _changeCatgory,
+      _getData,
+      _getPreAndNextData,
+      _selectCategoryData
     } = this;
 
-
-    return(
-    <div>
+    return (
       <div>
-        <Head 
-          login = {login}
-          admin = {admin}
+        <div>
+          <Head
+            login={login}
+            admin={admin}
+            _login={_login}
+            _logout={_logout}
+            login_modal={login_modal}
+          />
+        </div>
 
-          _login = {_login}
-          _logout = {_logout}
-          login_modal= {login_modal}
-
-        />
+        <div>
+          <Main
+            admin={admin}
+            login={login}
+            login_modal={login_modal}
+            list_data={list_data}
+            list_all_page={list_all_page}
+            list_page={list_page}
+            _changePage={_changePage}
+            _changeCatgory={_changeCatgory}
+            user_id={user_id}
+            data={data}
+            _getData={_getData}
+            pre_view={pre_view}
+            next_view={next_view}
+            _getPreAndNextData={_getPreAndNextData}
+            category_data={category_data}
+            select_category={select_category}
+            _selectCategoryData={_selectCategoryData}
+          />
+        </div>
       </div>
-
-      <div>
-        <Main
-          admin = {admin}
-
-          login = {login}
-          login_modal = {login_modal}
-         
-          list_data = {list_data}
-          list_all_page = {list_all_page} 
-         
-          list_page = {list_page}
-          _changePage = {_changePage}
-          _changeCatgory = {_changeCatgory}
-          user_id = {user_id}
-          data = {data}
-
-          _getData = {_getData}
-
-          pre_view = {pre_view}
-          next_view = {next_view}
-          _getPreAndNextData = {_getPreAndNextData}
-          category_data = {category_data}
-          select_category = {select_category}
-          _selectCategoryData = {_selectCategoryData}
-          
-        />
-      </div>
-    </div>
-    )
+    );
   }
 }
 
@@ -419,7 +431,6 @@ export default App;
 
 */
 
-
 /*
   componentDidMount() {
     this._getData();
@@ -550,7 +561,6 @@ export default App;
 
 export default App;
 */
-
 
 /*
 import React, { Component } from 'react';
