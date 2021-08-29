@@ -47,8 +47,9 @@ class App extends Component {
     }
   }
 
+  /*
   _getData = async id => {
-    const getData = await API.get(
+    const getData = await API.post(
       "/api/get/board_data",
       {
         data: { id: id }
@@ -66,6 +67,7 @@ class App extends Component {
 
     return this.setState({ data: getData, date: date });
   };
+  */
 
   _setPage = function () {
     if (sessionStorage.page) {
@@ -101,14 +103,15 @@ class App extends Component {
     */
 
     // Board 테이블 데이터 전체 수
-    const total_cnt = await API.get("/api/get/board_cnt");
-    //data : { search : search, category : categorys }
+    const total_cnt = await API.post("/api/get/board_cnt");
+    //data = { search: search, category: categorys };
 
     // 데이터 가져오기
-    const total_list = await API.get("/api/get/board", {
+    const total_list = await API.post("/api/get/board", {
       data: {
         limit: list_limit,
         page: list_pages,
+
         //search : search,
         category: categorys
       }
@@ -117,9 +120,11 @@ class App extends Component {
     // 전체 페이지 수 구하기
     let page_arr = [];
 
+    /*
     for (let i = 1; i <= Math.ceil(total_cnt.data.cnt / list_limit); i++) {
       page_arr.push(i);
     }
+    */
 
     this.setState({
       list_data: JSON.stringify(total_list.data),
