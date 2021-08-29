@@ -9,9 +9,6 @@ router.use(
     })
 );
 
-/*
-main 페이지에서 목록만 보임.
-*/
 //router.post('/send/pw', controller.api.sendPw);
 
 router.post('/add/board', controller.add.board);
@@ -25,6 +22,12 @@ router.post('/add/comment', controller.add.comment);
 router.post('/get/comment', controller.get.comment);
 router.post('/update/comment', controller.update.comment);
 router.post('/delete/comment', controller.delete.comment);
+
+router.post('/add/category', controller.add.category);
+router.get('/get/category', controller.get.category);
+router.post('/update/category', controller.update.category);
+router.post('/delete/category', controller.delete.category)
+
 
 
 /*

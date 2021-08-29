@@ -1,6 +1,7 @@
 const psth = require('path');
 const boards = require('./boards');
 const comments = require('./comments');
+const categories = require('./categories');
 
 module.exports = {
     needs: () => upload,
@@ -30,6 +31,22 @@ module.exports = {
                 }
             })
         },
+        category : (req, res) => {
+            const body = req.body;
+
+            categories.add.category(body, result => {
+                var obj = {};
+                if(result) {
+                    obj['suc'] = true;
+                    obj['msg'] = '카테고리가 생성되었습니다.';
+                }
+                else {
+                    obj['suc'] = false;
+                    obj['msg'] = '이미 있는 카테고리입니다.';
+                }
+                res.send(obj)
+            })
+        },
         comment : (req,res) => {
             const body = req.body;
 
@@ -54,6 +71,11 @@ module.exports = {
             boards.get.board_data(body, data => {
               const result = { data : data }
               res.send(result)
+            })
+        },
+        category : (req, res) => {
+            categories.get.category(data => {
+                res.send(data)
             })
         },
         comment : (req, res) => {
@@ -81,6 +103,22 @@ module.exports = {
                 res.send(true)
             })
         },
+        category : (req, res) => {
+            const body = req.body;
+
+            categories.update.category(body, result =>{
+                var obj = {};
+                if(result) {
+                    obj['suc'] = true;
+                    obj['msg'] = '카테고리가 생성되었습니다.';
+                }
+                else {
+                    obj['suc'] = false;
+                    obj['msg'] = '이미 있는 카테고리입니다.';
+                }
+                res.send(obj)
+            })
+        },
         comment : (req, res) => {
             const body = req.body;
 
@@ -95,6 +133,15 @@ module.exports = {
 
             boards.delete.board(body, () => {
                 res.send(true)
+            })
+        },
+        category : (req, res) => {
+            const body = req.body;
+
+            categories.delete.category(body, result => {
+                if(result){
+                    res.send(result);
+                }
             })
         },
         comment : (req, res) => {

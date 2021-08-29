@@ -6,6 +6,7 @@ module.exports = {
     add : {
         board : (body, callback) => {
             Board.create({
+                category : body.category,
                 title : body.title,
                 id : body.id,
                 content : body.content,
@@ -24,7 +25,11 @@ module.exports = {
     get : {
         //게시물 목록 조회
         board : (callback) => {
-            Board.findAll()
+            Board.findAll({
+                where : {
+                    category : body.category
+                }
+            })
             .then(data => {
                 callback(data)
             })
@@ -56,8 +61,8 @@ module.exports = {
         //게시물 내용 업데이트
         board : (body, callback) => {
             Board.update({
+                category : body.category,
                 title : body.title,
-                id : body.id,
                 content : body.content
             }, {
                 where : { num : body.num }
