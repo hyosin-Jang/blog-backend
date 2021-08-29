@@ -9,10 +9,10 @@ module.exports = class Board extends Sequelize.Model {
           allowNull: false,
           primaryKey: true
         },
-        /*category: {
+        category: {
           type: Sequelize.STRING(30),
           allowNull: true
-        },*/
+        },
         title: {
           type: Sequelize.STRING(30),
           allowNull: true
@@ -48,6 +48,7 @@ module.exports = class Board extends Sequelize.Model {
   }
   static associate(db) {
     db.Board.belongsTo(db.Member, { foreignKey: "id", targetKey: "id" });
-    db.Board.hasOne(db.Comment, { foreignKey: "board_num", sourceKey: "num"});
+    db.Board.hasMany(db.Comment, { foreignKey: "board_num", sourceKey: "num"});
+    db.Board.belongsTo(db.Category, { foriegnKey: "category", targetKey: "category"});
   }
 };

@@ -4,7 +4,7 @@ module.exports = class Category extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        ct_name: {
+        category: {
           type: Sequelize.STRING(30),
           allowNull: false,
           primaryKey: true
@@ -21,5 +21,7 @@ module.exports = class Category extends Sequelize.Model {
       }
     );
   }
-  static associate(db) {}
+  static associate(db) {
+    db.Category.hasMany(db.Board, { foriegnKey : "category", sourceKey: "category"});
+  }
 };

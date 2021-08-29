@@ -4,28 +4,23 @@ module.exports = class Member extends Sequelize.Model {
   static init(sequelize) {
     return super.init(
       {
-        m_tokens: {
-          type: Sequelize.STRING(30),
-          allowNull: true,
-          defaultValue: 0
-        },
-        m_id: {
+        id: {
           type: Sequelize.STRING(30),
           allowNull: false,
           primaryKey: true
         },
-        m_email: {
+        email: {
           type: Sequelize.STRING(30),
           allowNull: true,
           defaultValue: "cdnnnl@ewhian.net"
         },
-        m_name: {
+        name: {
           type: Sequelize.STRING(30),
           allowNull: true,
           defaultValue: "name"
         },
-        m_picture: {
-          type: Sequelize.STRING(20),
+        picture: {
+          type: Sequelize.STRING(50),
           allowNull: true,
           defaultValue: "프로필사진"
         }
@@ -41,6 +36,6 @@ module.exports = class Member extends Sequelize.Model {
     );
   }
   static associate(db) {
-    db.Member.hasMany(db.Board, { foreignKey: "b_id", sourceKey: "m_id" });
+    db.Member.hasMany(db.Board, { foreignKey: "id", sourceKey: "id" });
   }
 };
