@@ -110,7 +110,7 @@ module.exports = {
                 var obj = {};
                 if(result) {
                     obj['suc'] = true;
-                    obj['msg'] = '카테고리가 생성되었습니다.';
+                    obj['msg'] = '카테고리가 수정되었습니다.';
                 }
                 else {
                     obj['suc'] = false;
