@@ -11,7 +11,8 @@ module.exports = class Board extends Sequelize.Model {
         },
         category: {
           type: Sequelize.STRING(30),
-          allowNull: true
+          allowNull: true,
+          defaultValue: "category"
         },
         title: {
           type: Sequelize.STRING(30),
@@ -22,7 +23,8 @@ module.exports = class Board extends Sequelize.Model {
           allowNull: false
         },
         content: {
-          type: Sequelize.TEXT
+          type: Sequelize.TEXT,
+          allowNull: true
         },
         date: {
           type: Sequelize.DATE,
@@ -38,7 +40,6 @@ module.exports = class Board extends Sequelize.Model {
       {
         sequelize,
         timestamp: false,
-        underscored: false,
         modelName: "Board",
         tableName: "boards",
         charset: "utf8",
@@ -48,7 +49,6 @@ module.exports = class Board extends Sequelize.Model {
   }
   static associate(db) {
     db.Board.belongsTo(db.Member, { foreignKey: "id", targetKey: "id" });
-    db.Board.hasMany(db.Comment, { foreignKey: "board_num", sourceKey: "num"});
-    db.Board.belongsTo(db.Category, { foriegnKey: "category", targetKey: "category"});
+    db.Board.hasOne(db.Comment, { foreignKey: "board_num", sourceKey: "num" });
   }
 };
