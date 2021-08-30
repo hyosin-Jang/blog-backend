@@ -20,14 +20,16 @@ This is a personal blog website builds on React.
 * Login ( local / google-OAuth)  
 * CRUD  
 * Pagination  
-* Design website using React and Nodejs  
+* Design and create website using React and Nodejs  
 * Connect with MySQL  
-* Image build using Docker  
+* Build image using Docker  
 <br>
 
 ## 🛠 Development Stack  
   
-React  Nodejs  Docker  
+* React  
+* Nodejs  
+* Docker  
 <br>  
   
 ## ❤️ Frontend  
