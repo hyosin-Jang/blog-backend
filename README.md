@@ -68,8 +68,8 @@ https://www.notion.so/43bd1cea60e8443eac4782d736c8f383
 
 ## How to Run this project  
 1. git clone https://github.com/hyosin-Jang/blog-backend.git  
-
-2. yarn dev  
+2. npm install
+3. yarn dev
 <br>  
 <br>  
   
