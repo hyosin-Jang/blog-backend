@@ -119,7 +119,7 @@ server/routers :
 Minji Chang  https://github.com/SUMMERLOVE7  
 Hyosin Jang  https://github.com/hyosin-Jang  
 Seojin Kwak  https://github.com/SJ-Kwak  
-Sunny Lee  https://github.com/sunnyineverywhere  
+SeonUi Lee  https://github.com/sunnyineverywhere  
 <br>  
   
 ## References  
