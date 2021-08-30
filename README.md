@@ -34,11 +34,11 @@ This is a personal blog website builds on React.
   
 ## ❤️ Frontend  
   
-### 🎨 Design  
+### > 🎨 Design  
 ![image](https://user-images.githubusercontent.com/81309465/131250903-9cd344d5-0880-49de-ac82-21678e5463d3.png)  
 <br>
 
-### 📁 Structure  
+### > 📁 Structure  
 src : Directory for frontend code  
 src/views/image : Directory for background image of website  
 src/views/inc : Directory for website header  
