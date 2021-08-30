@@ -17,50 +17,38 @@ class view extends Component {
   }
 
   _getData = async function () {
-    const board_id = this.props.match.params.data;
+    const id = this.props.match.params.data;
+    console.log("id", id);
 
-    const getData = await API.post("/api/get/board_data", {
-      data: { id: board_id }
-    });
+    // id: 1
+    const getData = await API.post("/api/get/board_data", { num: id });
 
-    const date =
-      getData.data[0].date.slice(0, 10) +
-      " " +
-      getData.data[0].date.slice(11, 16);
-    console.log(getData);
+    console.log("getData", getData);
+    console.log("getData keys", getData.data.keys(0));
+    const title = getData.data.keys(0).title;
+    console.log(title);
 
-    return this.setState({ data: getData, date: date });
+    return this.setState({ data: getData.data, id: id });
   };
 
   render() {
-    const { data, date } = this.state;
+    const data = this.state.data;
+    console.log("data title:", data);
 
     return (
       <div className="Write">
-        {data.data ? (
-          <div>
-            <div className="top_title">
-              <input
-                type="text"
-                id="title_txt"
-                name="title"
-                defaultValue={data.data[0].title}
-                readOnly
-              />
-
-              <div className="date_div">{date}</div>
-            </div>
-
-            <div>
-              <textarea
-                id="content_txt"
-                name="contents"
-                defaultValue={data.data[0].contents}
-                readOnly
-              ></textarea>
-            </div>
+        <div>
+          <div className="top_title">
+            제목:
+            <input type="text" id="title_txt" name="title" readOnly />
+            <div className="date_div">{this.state.date}</div>
           </div>
-        ) : null}
+
+          <div>
+            내용:
+            <textarea id="content_txt" name="contents" readOnly></textarea>
+          </div>
+        </div>
       </div>
     );
   }
