@@ -50,25 +50,25 @@ src/views/page : Directory for total function of website
 ### 📄 DB&API Spec
 * DB Spec  
   + members  
-    - id : 유저 고유값  
-    - email : google 이메일  
-    - name : google에 등록한 이름  
-    - picture : google 사진  
+    - id : Unique user id  
+    - email : Google email  
+    - name : Google givenName  
+    - picture : Google picture  
   + categories  
-    - category: 카테고리명  
+    - category: Category name  
   + boards  
-    - num: 게시물 고유값  
-    - category: 카테고리명  
-    - title: 제목  
-    - id: 유저 고유값  
-    - content: 게시물 내용  
-    - date: 게시물 작성시간  
-    - hit: 조회수  
+    - num: Unique posts id  
+    - category: Category name  
+    - title: Title of posts  
+    - id: Unique user id  
+    - content: Content of posts  
+    - date: Posting time  
+    - hit: View count  
   + comments  
-    - id: 유저 고유값  
-    - num: 댓글 고유값  
-    - board_num: 게시물 고유값  
-    - content: 댓글 내용  
+    - id: Unique user id  
+    - num: Unique comment id  
+    - board_num: Unique board id  
+    - content: Content of comments  
 
 
 * API Spec   
