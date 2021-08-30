@@ -48,7 +48,7 @@ src/views/page : Directory for total function of website
 ## 💙 Backend  
 
 ### 📄 DB&API Spec
-DB spec  
+* DB Spec  
 members  
 id : 유저 고유값  
 email : google 이메일  
@@ -69,8 +69,9 @@ num: 댓글 고유값
 board_num: 게시물 고유값  
 id:  
 content: 댓글 내용  
-<br>
-API Spec  
+
+
+* API Spec   
 boards  
 Add Posts  
 POST api/add/board  
@@ -105,7 +106,7 @@ GET api/get/category
 Update Categories  
 PUT api/update/category  
 
-<br>
+
 ###  📁 Structure  
 server/config :  
 server/db :  
