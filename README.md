@@ -1,14 +1,14 @@
 # 🐳 PERSONAL BLOG WEBSITE 🐳
 
 ## 📋 Index
-[1. Description](#description)
-[2. Details & Functions](#details-&-functions)
-[3. Development Stack](#development-stack)
-[4. Frontend](#frontend)
-[5. Backend](#backend)
-[6. Contributors](#contributors)
-[7. References](#references)
-[8. How to run this project](#how-to-run-this-project)
+[1. Description](#description)  
+[2. Details & Functions](#details-&-functions)  
+[3. Development Stack](#development-stack)  
+[4. Frontend](#frontend)  
+[5. Backend](#backend)  
+[6. Contributors](#contributors)  
+[7. References](#references)  
+[8. How to run this project](#how-to-run-this-project)  
 
 
 ## 📌 Description
