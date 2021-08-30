@@ -33,6 +33,7 @@ class write extends Component {
       .catch(error => {
         console.error(error);
       });
+      return window.location.replace("/");
   };
 
   componentDidMount() {
