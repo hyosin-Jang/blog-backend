@@ -1,81 +1,86 @@
 const sequelize = require("../models").sequelize;
-const Category = require("../models");
-const Board = require("../models");
+const Category = require("../models/categories");
+const Board = require("../models/boards");
 
 module.exports = {
   add : {
-    category : (body, callback) => {
-      Category.count({
-        where : { category : body.category}
-      })
-      .then(cnt => {
-        if(cnt > 0){
-          callback(false);
-        }
-        else {
-          Category.create({
-            category : body.category
-          })
-          .then( () => {
-            callback(true)
-          })
-          .catch(err => {
-            throw err;
-          })
-        }
-      })
+    category : async (body, callback) => {
+      try{
+        await Category.count({
+          where : { category : body.category}
+        })
+        .then(cnt => {
+          if(cnt > 0){
+            callback(false);
+          }
+          else {
+            Category.create({
+              category : body.category
+            })
+            .then( () => {
+              callback(true)
+            })
+          }
+        });
+      } catch (err) {
+          throw err;
+      }
     }
   },
   get : {
-    category : (callback) => {
-      Category.findAll()
-      .then(result => {
-        callback(result);
-      })
-      .catch(err => {
+    category : async (callback) => {
+      try{
+        await Category.findAll()
+        .then(result => {
+          callback(result);
+        })
+      }
+      catch(err) {
         throw err;
-      })
+      }
     }    
   } ,
   update : {
-    category : (body, callback) => {
-      Category.count({
-        where : { category : body.category }
-      })
-      .then(cnt => {
-        if(cnt > 0){
-          callback(false);
-        }
-        else {
-          Category.update({ category : body.category },{
+    category : async (body, callback) => {
+      try{
+        await Category.count({
+          where : { category : body.category }
+        })
+        .then(cnt => {
+          if(cnt > 0){
+            callback(false);
+          }
+          else {
+            Category.update({ category : body.category },{
+              where : { category : body.category }
+            })
+            .then( () => {
+              callback(true)
+            })
+          }
+        });
+      } catch (err) {
+          throw err;
+      }
+    }
+  },
+  delete : {
+    category : async (body, callback) => {
+      try{
+        await Category.destroy({
+          where : { category : body.category }
+        })
+        .then( () => {
+          Board.update({ category : null }, {
             where : { category : body.category }
           })
           .then( () => {
             callback(true)
           })
-          .catch(err => {
-            throw err;
-          })
-        }
-      })
-    }
-  },
-  delete : {
-    category : (body, callback) => {
-      Category.destroy({
-        where : { category : body.category }
-      })
-      .then( () => {
-        Board.update({ category : null }, {
-          where : { category : body.category }
-        })
-        .then( () => {
-          callback(true)
-        })
-        .catch(err => {
-          throw err;
-        })
-      })
+        });
+      } catch (err) {
+        throw err;
+      }
     }
   }
 }
