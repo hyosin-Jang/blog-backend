@@ -72,13 +72,13 @@ content: 댓글 내용
 
 
 * API Spec   
-boards  
-Add Posts  
-POST api/add/board  
-Get a list of posts  
-GET api/get/board  
-Update Posts  
-PUT api/update/board  
++boards  
+-Add Posts  
+--POST api/add/board  
+-Get a list of posts  
+--GET api/get/board  
+-Update Posts  
+-PUT api/update/board  
 Delete Posts  
 DELETE api/delete/board  
 상세 게시물 조회  
