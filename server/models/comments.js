@@ -6,6 +6,7 @@ module.exports = class Comment extends Sequelize.Model {
       {
         num: {
           type: Sequelize.INTEGER(100),
+          autoIncrement: true,
           allowNull: false,
           primaryKey: true
         },
