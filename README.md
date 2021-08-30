@@ -63,7 +63,7 @@ Sunny Lee  https://github.com/sunnyineverywhere
 <br>  
   
 ## References  
-https://www.notion.so/43bd1cea60e8443eac4782d736c8f383  
+https://grave-waterlily-5e9.notion.site/43bd1cea60e8443eac4782d736c8f383
 <br>
 
 ## How to Run this project  
