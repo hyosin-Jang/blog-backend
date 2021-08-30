@@ -48,10 +48,10 @@ src/views/page : Directory for total function of website
 ## 💙 Backend  
   
 ### 📁 Structure  
-server/config :
-server/db :
-server/models :
-server/routers : 
+server/config :  
+server/db :  
+server/models :  
+server/routers :   
 
 <br>
 
