@@ -9,8 +9,8 @@
 6. [Contributors](#contributors)  
 7. [References](#references)  
 8. [How to run this project](#how-to-run-this-project)  
-
-
+<br>
+<br>
 ## 📌 Description
 This is a personal blog website builds on React.  
   
