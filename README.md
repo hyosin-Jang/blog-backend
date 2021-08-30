@@ -108,10 +108,10 @@ src/views/page : Directory for total function of website
 
 
 ###  📁 Structure  
-server/config :  Directory for security maintenance
-server/db :  Directory for construction of database
-server/models :  Directory for sequelize models
-server/routers :   Directory for defining routes
+server/config :  Directory for security maintenance  
+server/db :  Directory for construction of database  
+server/models :  Directory for sequelize models  
+server/routers :   Directory for defining routes  
 
 
 
