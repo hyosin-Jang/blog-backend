@@ -74,37 +74,37 @@ src/views/page : Directory for total function of website
 * API Spec   
   + boards  
     * Add Posts  
-     + POST api/add/board  
+      + POST api/add/board  
     * Get a list of posts  
-     + GET api/get/board  
+      + GET api/get/board  
     * Update Posts  
-     + PUT api/update/board  
+      + PUT api/update/board  
     * Delete Posts  
-     + DELETE api/delete/board  
+      + DELETE api/delete/board  
     * Get a detailed posting  
-     + GET api/get/board_data  
+      + GET api/get/board_data  
     * Update View Count  
-     + PUT api/update/hit  
+      + PUT api/update/hit  
     * Get a Number of Postings  
-     + GET api/get/board_cnt  
+      + GET api/get/board_cnt  
     * Get a Content of Previous and Next Button  
-     + GET api/get/prev_and_next  
+      + GET api/get/prev_and_next  
   + comments  
     * Add Comments  
-     + POST api/add/comment  
+      + POST api/add/comment  
     * Get Comments  
-     + GET api/get/comment  
+      + GET api/get/comment  
     * Update Comments  
-     + PUT api/update/comment  
+      + PUT api/update/comment  
     * Delete Comments  
-     + DELETE api/delete/comment  
+      + DELETE api/delete/comment  
   + categories  
     * Add Categories  
-     + POST api/add/category  
+      + POST api/add/category  
     * Get Categories  
-     + GET api/get/category  
+      + GET api/get/category  
     * Update Categories  
-     + PUT api/update/category  
+      + PUT api/update/category  
 
 
 ###  📁 Structure  
