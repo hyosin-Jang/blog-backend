@@ -10,40 +10,54 @@ class list extends Component {
       data: [],
       page: 1,
       limit: 10,
-      all_page: []
+      all_page: [],
+      id: "cdnnnl"
     };
   }
 
-  componentWillMount() {
-    this._getListData();
+  componentDidMount() {
+    this._getListData(); // 컴포넌트 렌더링시 getListData
     this._setPage();
+    //window.SessionStorage.getItem("login");
   }
 
-  _getListData = async function () {
+  _getListData = () => {
     const { limit } = this.state;
     const page = this._setPage();
+    const send_data = { id: this.state.id, limit: limit, page: page };
 
-    //Board 테이블 전체 데이터 수
-
-    //const total_cnt = await API.get("/api/get/board_cnt");
-    //console.log(total_cnt.data.cnt);
+    //this.setState({
+    //  data: [{ id: "1", title: "제목", date: "2021-08-30" }] //response
+    // });
 
     //데이터 가져오기
-    const total_list = await API.post("/api/get/board", {
-      data: { limit: limit, page: page }
-    });
+    API.post("/api/get/board", send_data)
+      .then(response => {
+        console.log("list", response); // title: content 찍혀야 됨
+
+        this.setState({ data: response.data });
+        //this._makeData(response);
+      })
+      .catch(error => {
+        console.error(error);
+      });
 
     //전체 페이지 수 구하기
     let page_arr = [];
 
-    /*
-    for (let i = 1; i <= Math.ceil(total_cnt.data.cnt / limit); i++) {
-      page_arr.push(i);
-    }
-    */
-
-    this.setState({ data: total_list, all_page: page_arr });
+    // this.setState({ data: total_list, all_page: page_arr });
   };
+
+  /*
+  _makeData = function (data) {
+    data.data.map((el, index) => {
+      console.log("el:", el);
+      this.setState({
+        data: el
+      });
+    }); // 원소
+  };
+  */
 
   _changePage = function (el) {
     this.setState({ page: el });
@@ -63,7 +77,7 @@ class list extends Component {
   };
 
   render() {
-    const list = this.state.data.data;
+    const list = this.state.data;
     const { all_page, page } = this.state;
 
     console.log(this.state.data);
@@ -77,7 +91,8 @@ class list extends Component {
 
         {list
           ? list.map((el, key) => {
-              const view_url = "/view" + el.board_id;
+              const data = el.num;
+              const view_url = `/view/${data}`;
 
               return (
                 <div className="list_grid list_data" key={key}>
@@ -86,7 +101,7 @@ class list extends Component {
                     <Link to={view_url}> {el.title} </Link>{" "}
                   </div>
                   <div> </div>
-                  <div className="acenter"> {el.date.slice(0, 10)} </div>
+                  <div className="acenter"> {el.date.substring(0, 10)} </div>
                 </div>
               );
             })
