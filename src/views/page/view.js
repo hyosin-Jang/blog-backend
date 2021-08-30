@@ -23,30 +23,40 @@ class view extends Component {
     // id: 1
     const getData = await API.post("/api/get/board_data", { num: id });
 
-    console.log("getData", getData);
-    console.log("getData keys", getData.data.keys(0));
-    const title = getData.data.keys(0).title;
-    console.log(title);
+    console.log("getData", getData.data[0].title);
+    //console.log("getData keys", getData.data.find(0));
+    //const title = getData.data.keys(0).title;
+    //console.log(title);
 
-    return this.setState({ data: getData.data, id: id });
+    return this.setState({ data: getData.data[0], id: id });
   };
 
   render() {
     const data = this.state.data;
-    console.log("data title:", data);
 
     return (
       <div className="Write">
         <div>
           <div className="top_title">
             제목:
-            <input type="text" id="title_txt" name="title" readOnly />
+            <input
+              type="text"
+              id="title_txt"
+              name="title"
+              defaultValue={data.title}
+              readOnly
+            />
             <div className="date_div">{this.state.date}</div>
           </div>
 
           <div>
             내용:
-            <textarea id="content_txt" name="contents" readOnly></textarea>
+            <textarea
+              id="content_txt"
+              name="contents"
+              defaultValue={data.content}
+              readOnly
+            ></textarea>
           </div>
         </div>
       </div>
