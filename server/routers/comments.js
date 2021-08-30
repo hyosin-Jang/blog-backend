@@ -1,5 +1,6 @@
 const sequelize = require("../models").sequelize;
 const Comment = require("../models/comments");
+const Member = require("../models/members");
 
 module.exports = {
   //Create
@@ -27,7 +28,7 @@ module.exports = {
                 await Comment.findAll({
                     include : [
                         {
-                            model : members,
+                            model : Member,
                             attributes : ['id']
                         }
                     ],
