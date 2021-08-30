@@ -1,66 +1,69 @@
 # 🐳 PERSONAL BLOG WEBSITE 🐳
 
 ## 📋 Index
-[1. Description](#description)  
-[2. Details & Functions](#details-&-functions)  
-[3. Development Stack](#development-stack)  
-[4. Frontend](#frontend)  
-[5. Backend](#backend)  
-[6. Contributors](#contributors)  
-[7. References](#references)  
-[8. How to run this project](#how-to-run-this-project)  
+1. [Description](#description)  
+2. [Details & Functions](#details-&-functions)  
+3. [Development Stack](#development-stack)  
+4. [Frontend](#frontend)  
+5. [Backend](#backend)  
+6. [Contributors](#contributors)  
+7. [References](#references)  
+8. [How to run this project](#how-to-run-this-project)  
 
 
 ## 📌 Description
-This is a personal blog website builds on React.
+This is a personal blog website builds on React.  
+  
+  
+### 🔎 Details & Functions  
+* Login ( local / google-OAuth)  
+* CRUD  
+* Pagination  
+* Design website using React and Nodejs  
+* Connect with MySQL  
+* Image build using Docker  
 
-### 🔎 Details & Functions
-* Login ( local / google-OAuth)
-* CRUD
-* Pagination
-* Design website using React and Nodejs
-* Connect with MySQL
-* Image build using Docker
-
-## 🛠 Development Stack
-
-React  Nodejs  Docker
-
-
-## ❤️ Frontend
-
-### 🎨 Design
-![image](https://user-images.githubusercontent.com/81309465/131250903-9cd344d5-0880-49de-ac82-21678e5463d3.png)
-
-### 📁 Structure
-src : Directory for frontend code
-src/views/image : Directory for background image of website
-src/views/inc : Directory for website header
-src/views/page : Directory for total function of website
-
-
-## 💙 Backend
-
-### 📁 Structure
-server : 
-
-
-
-## 👸 Contributors
-Minji Chang  https://github.com/SUMMERLOVE7
-Hyosin Jang  https://github.com/hyosin-Jang
-Seojin Kwak  https://github.com/SJ-Kwak
-Sunny Lee  https://github.com/sunnyineverywhere
+## 🛠 Development Stack  
+  
+React  Nodejs  Docker  
+  
+  
+## ❤️ Frontend  
+  
+### 🎨 Design  
+![image](https://user-images.githubusercontent.com/81309465/131250903-9cd344d5-0880-49de-ac82-21678e5463d3.png)  
+  
+### 📁 Structure  
+src : Directory for frontend code  
+src/views/image : Directory for background image of website  
+src/views/inc : Directory for website header  
+src/views/page : Directory for total function of website  
+  
+  
+## 💙 Backend  
+  
+### 📁 Structure  
+server :   
 
 
-## References
-https://www.notion.so/43bd1cea60e8443eac4782d736c8f383
 
-## How to Run this project
-1. git clone https://github.com/hyosin-Jang/blog-backend.git
-2. yarn dev
+## 👸 Contributors  
+Minji Chang  https://github.com/SUMMERLOVE7  
+Hyosin Jang  https://github.com/hyosin-Jang  
+Seojin Kwak  https://github.com/SJ-Kwak  
+Sunny Lee  https://github.com/sunnyineverywhere  
+  
+  
+## References  
+https://www.notion.so/43bd1cea60e8443eac4782d736c8f383  
+  
+## How to Run this project  
+1. git clone https://github.com/hyosin-Jang/blog-backend.git  
 
-
+2. yarn dev  
+  
+  
+  
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
