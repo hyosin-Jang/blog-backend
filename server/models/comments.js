@@ -7,7 +7,7 @@ module.exports = class Comment extends Sequelize.Model {
         num: {
           type: Sequelize.INTEGER(100),
           autoIncrement: true,
-          allowNull: false,
+          allowNull: true,
           primaryKey: true
         },
         board_num: {
