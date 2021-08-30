@@ -46,7 +46,65 @@ src/views/page : Directory for total function of website
 <br>  
   
 ## 💙 Backend  
-  
+
+### 📄 DB&API Spec
+DB spec
+members
+id : 유저 고유값
+email : google 이메일
+name : google에 등록한 이름
+picture : google 사진
+categories
+category: 카테고리명
+boards
+num: 게시물 고유값
+category: 카테고리명
+title: 제목
+id: 
+content: 게시물 내용
+date: 게시물 작성시간
+hit: 조회수
+comments
+num: 댓글 고유값
+board_num: 게시물 고유값
+id: 
+content: 댓글 내용
+
+API Spec
+boards
+Add Posts
+POST api/add/board
+Get a list of posts
+GET api/get/board
+Update Posts
+PUT api/update/board
+Delete Posts
+DELETE api/delete/board
+상세 게시물 조회
+GET api/get/board_data
+Get a Detailed Post
+PUT api/update/hit
+Get a Number of Postings
+GET api/get/board_cnt
+Get a Content of Previous and Next Button
+GET api/get/prev_and_next
+comments
+Add Comments
+POST api/add/comment
+Get Comments
+GET api/get/comment
+Update Comments
+PUT api/update/comment
+Delete Comments
+DELETE api/delete/comment
+categories
+Add Categories
+POST api/add/category
+Get Categories
+GET api/get/category
+Update Categories
+PUT api/update/category
+
 ###  📁 Structure  
 server/config :  
 server/db :  
