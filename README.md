@@ -69,7 +69,7 @@ num: 댓글 고유값
 board_num: 게시물 고유값
 id: 
 content: 댓글 내용
-
+<br>
 API Spec
 boards
 Add Posts
@@ -105,6 +105,7 @@ GET api/get/category
 Update Categories
 PUT api/update/category
 
+<br>
 ###  📁 Structure  
 server/config :  
 server/db :  
