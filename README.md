@@ -10,10 +10,11 @@
 7. [References](#references)  
 8. [How to run this project](#how-to-run-this-project)  
 <br>
-<br>
-## 📌 Description
+
+
+## 📌 Description  
 This is a personal blog website builds on React.  
-  
+<br>  
   
 ### 🔎 Details & Functions  
 * Login ( local / google-OAuth)  
@@ -22,47 +23,50 @@ This is a personal blog website builds on React.
 * Design website using React and Nodejs  
 * Connect with MySQL  
 * Image build using Docker  
+<br>
 
 ## 🛠 Development Stack  
   
 React  Nodejs  Docker  
-  
+<br>  
   
 ## ❤️ Frontend  
   
 ### 🎨 Design  
 ![image](https://user-images.githubusercontent.com/81309465/131250903-9cd344d5-0880-49de-ac82-21678e5463d3.png)  
-  
+<br>
+
 ### 📁 Structure  
 src : Directory for frontend code  
 src/views/image : Directory for background image of website  
 src/views/inc : Directory for website header  
 src/views/page : Directory for total function of website  
-  
+<br>  
   
 ## 💙 Backend  
   
 ### 📁 Structure  
 server :   
 
-
+<br>
 
 ## 👸 Contributors  
 Minji Chang  https://github.com/SUMMERLOVE7  
 Hyosin Jang  https://github.com/hyosin-Jang  
 Seojin Kwak  https://github.com/SJ-Kwak  
 Sunny Lee  https://github.com/sunnyineverywhere  
-  
+<br>  
   
 ## References  
 https://www.notion.so/43bd1cea60e8443eac4782d736c8f383  
-  
+<br>
+
 ## How to Run this project  
 1. git clone https://github.com/hyosin-Jang/blog-backend.git  
 
 2. yarn dev  
-  
-  
+<br>  
+<br>  
   
 # Getting Started with Create React App
 
