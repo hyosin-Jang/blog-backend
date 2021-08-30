@@ -45,7 +45,6 @@ src/views/inc : Directory for website header
 src/views/page : Directory for total function of website  
 
 
-<br>
 ## 💙 Backend  
 
 ### 📄 DB&API Spec
