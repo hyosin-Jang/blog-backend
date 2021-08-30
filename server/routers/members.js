@@ -1,100 +1,60 @@
-const express = require("express");
-const router = express.Router();
-const { sequelize } = require("../models/index.js");
-const bodyParser = require("body-parser");
-/*
-const dbConfig = require("../config/dbConfig.js");
-const mysql = require("mysql");
+const sequelize = require("../models").sequelize;
+const Member = require("../models/members");
 
-const dbOptions = {
-  host: dbConfig.host,
-  port: dbConfig.port, // 3306번 사용
-  user: dbConfig.username,
-  password: dbConfig.password,
-  database: dbConfig.database
-};
+module.exports = {
+  //Select
 
-const con = mysql.createConnection(dbOptions);
-con.connect();
-
-*/
-router.use(bodyParser.json());
-
-//Select
-router.get("/", (req, res) => {
-  sequelize.query("SELECT * FROM members", (error, rows) => {
-    if (error) {
-      throw error;
-    }
-    console.log("Member is: ", rows);
-    res.send(rows);
-  });
-});
-
-router.get("/:id", (req, res) => {
-  sequelize.query(
-    "SELECT * FROM members WHERE id='" + req.params.id + "'",
-    (error, rows) => {
-      if (error) {
-        throw error;
+  // /api/get/member
+  get: {
+    //  멤버 아이디에 따라 제목, 날짜 반환
+    // req: body.id에 사용자 googleId 필요
+    member: async (body, callback) => {
+      try {
+        const user = await Member.findAll({
+          attributes: ["title", "date"],
+          where: {
+            id: body.id
+          }
+        }).then(() => {
+          callback(user); // title, data 반환
+        });
+      } catch (err) {
+        throw err;
       }
-      console.log("Member is: ", rows);
-      res.send(rows);
     }
-  );
-});
+  },
 
-//Insert
-router.post("/", (req, res) => {
-  var sql = "INSERT INTO members VALUES(?,?,?,?,?)";
-  var params = [
-    //req.body.m_tokens,
-    req.body.id,
-    req.body.email,
-    req.body.name,
-    req.body.picture
-  ];
-
-  sequelize.query(sql, params, (error, rows) => {
-    if (error) {
-      throw error;
+  // /api/add/member
+  // 멤버 등록
+  add: {
+    member: async (body, callback) => {
+      try {
+        await Member.create({
+          email: body.email,
+          id: body.id,
+          name: body.name,
+          picture: body.picture
+        }).then(() => {
+          callback(true);
+        });
+      } catch (err) {
+        throw err;
+      }
     }
-    console.log("Member is: ", rows);
-    res.send(rows);
-  });
-});
+  },
 
-//Update
-router.put("/:id", (req, res) => {
-  var sql =
-    "UPDATE members SET email=" +
-    req.body.email +
-    ", name=" +
-    req.body.name +
-    ", picture=" +
-    req.body.picture +
-    " WHERE id='" +
-    req.params.id +
-    "'";
-  sequelize.query(sql, (error, rows) => {
-    if (error) {
-      throw error;
+  delete: {
+    //멤버 삭제
+    member: async (body, callback) => {
+      try {
+        await Member.destroy({
+          where: { num: body.id } // body.id 필요
+        }).then(() => {
+          callback(true);
+        });
+      } catch (err) {
+        throw err;
+      }
     }
-    console.log("members info is: ", rows);
-    res.send(rows);
-  });
-});
-
-//Delete
-router.delete("/:id", (req, res) => {
-  var sql = "DELETE FROM members WHERE id='" + req.params.id + "'";
-  sequelize.query(sql, (error, rows) => {
-    if (error) {
-      throw error;
-    }
-    console.log("members info is: ", rows);
-    res.send(rows);
-  });
-});
-
-module.exports = router;
+  }
+};
