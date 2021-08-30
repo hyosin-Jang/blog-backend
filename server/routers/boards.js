@@ -1,12 +1,14 @@
 const sequelize = require("../models").sequelize;
 const Board = require("../models/boards");
+const Member = require("../models/members");
 
 module.exports = {
-  // Create
-  // 게시물 생성
+  //Create
+  // body: {title: "dd", contents:"oo"}
   add: {
     board: async (body, callback) => {
       try {
+        console.log("body", body);
         await Board.create({
           category: "백엔드",
           title: body.title, // title
@@ -23,13 +25,16 @@ module.exports = {
       }
     }
   },
-  // Select
-  // 게시물 목록 조회
+  //Select
   get: {
-    board: async callback => {
+    //게시물 목록 조회
+    board: async (body, callback) => {
       try {
-        await Board.findAll({}).then(data => {
-          callback(data);
+        await Board.findAll({
+          where: { id: body.id },
+          attributes: ["title", "date", "num"]
+        }).then(result => {
+          callback(result);
         });
       } catch (err) {
         console.error(err);
@@ -40,14 +45,10 @@ module.exports = {
     board_data: async (body, callback) => {
       try {
         await Board.findAll({
-          include: [
-            {
-              // model: members,
-              attributes: ["id"]
-            }
-          ],
-          where: { num: body.num }
+          where: { num: body },
+          attributes: ["date", "content", "title"]
         }).then(result => {
+          console.log("result:", result);
           callback(result);
         });
       } catch (err) {
